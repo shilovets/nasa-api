@@ -31,25 +31,6 @@ h1, h2, h3, h4, h5, h6 {
     padding: 5px;
 }
 
-#date {
-    margin-left: 20px;
-    outline: none;
-    min-width: 170px;
-
-    appearance: none;
-    box-sizing: border-box;
-    border: 2px solid #ada9a9;
-    background: transparent;
-    padding: 5px;
-    color: #ada9a9;
-    text-transform: uppercase;
-    font-weight: bold;
-}
-
-#date::-webkit-inner-spin-button {
-    display: none
-}
-
-#date::-webkit-calendar-picker-indicator {
-    background: transparent
+.picture-date h3{
+    margin-right: 20px;
 }

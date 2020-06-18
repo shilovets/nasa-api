@@ -58,6 +58,7 @@ export default class PictureDetails extends Component {
     render() {
         const {mediaType, title, url, date, explanation} = this.state.data;
         let mediaFile = null;
+
         const newDate = new Date();
         let year = newDate.getFullYear(),
             month = newDate.getMonth() + 1,
@@ -69,7 +70,7 @@ export default class PictureDetails extends Component {
         mediaType === 'image'
             ? mediaFile = <img src={url} alt="Astronomy"/>
             : mediaFile = (
-                <iframe src={url} frameborder="0" width="70%" height="600px" allowFullScreen title="video"></iframe>
+                <iframe src={url} frameBorder="0" width="70%" height="600px" allowFullScreen title="video"/>
             )
 
         return (
@@ -80,8 +81,8 @@ export default class PictureDetails extends Component {
                         ? <Spinner/>
                         : (<React.Fragment>
                             <div className="picture-date">
-                                <h3>Choose a day</h3>
-                                <input type="date" id="date" onChange={this.getDateValue}
+                                <h3>Choose another day</h3>
+                                <input type="date" value={`${year}-${month}-${day}`} onChange={this.getDateValue}
                                        max={year + '-' + month + '-' + day}/>
                             </div>
 
