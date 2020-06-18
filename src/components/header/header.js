@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {Link} from "react-router-dom";
 
 import "./header.css";
@@ -6,7 +6,7 @@ import "./header.css";
 const Header = () => {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-            <Link class="navbar-brand" to="/">Astronomy Picture of the Day</Link>
+            <Link className="navbar-brand" to="/">Astronomy Picture of the Day</Link>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
                     aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>

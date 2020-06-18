@@ -1,9 +1,11 @@
 import React, {Component} from "react";
+import {BrowserRouter, Switch, Route} from "react-router-dom";
+
+import Header from "../header/header";
 import PictureDetails from "../picture-details/picture-details";
+import PictureList from "../picture-list/picture-list";
 
 import "./app.css";
-import Header from "../header/header";
-import {BrowserRouter, Switch, Route} from "react-router-dom";
 
 export default class App extends Component {
 
@@ -13,9 +15,9 @@ export default class App extends Component {
                 <Header/>
                 <Switch>
                     <Route path="/" exact component={PictureDetails}/>
-                    <Route path="/catalog" render={() => <h1>This is future catalog</h1>}/>
+                    <Route path="/catalog" component={PictureList}/>
                 </Switch>
             </BrowserRouter>
-        )
-    }
-}
+        );
+    };
+};

@@ -18,10 +18,10 @@ export default class PictureDetails extends Component {
     };
 
     componentDidMount() {
-        this.getFullImageDate();
+        this.getMediaDate();
     };
 
-    getFullImageDate() {
+    getMediaDate() {
         this.setState({
             loading: true
         });
@@ -52,7 +52,7 @@ export default class PictureDetails extends Component {
             data: {
                 date: event.target.value
             }
-        }, this.getFullImageDate);
+        }, this.getMediaDate);
     };
 
     render() {
@@ -69,9 +69,8 @@ export default class PictureDetails extends Component {
         mediaType === 'image'
             ? mediaFile = <img src={url} alt="Astronomy"/>
             : mediaFile = (
-                <iframe src={url} frameborder="0" width="70%" height="600px" allowFullScreen></iframe>
+                <iframe src={url} frameborder="0" width="70%" height="600px" allowFullScreen title="video"></iframe>
             )
-
 
         return (
 
