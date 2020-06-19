@@ -1,6 +1,7 @@
 input[type="date"] {
   outline: none;
   min-width: 170px;
+  appearance: none;
   box-sizing: border-box;
   border: 2px solid #ada9a9;
   border-radius: 5px;
@@ -17,7 +18,4 @@ input[type="date"]::-webkit-inner-spin-button {
 
 input[type="date"]::-webkit-calendar-picker-indicator {
   background: transparent
-}
-input[type="date"]::-webkit-meter-suboptimum-value{
-  color: red;
 }
