@@ -10,7 +10,7 @@ export default class PictureList extends Component {
     state = {
         mediaList: [],
         dateFrom: '2020-06-13',
-        dateTo: '2020-06-18',
+        dateTo: '2020-06-19',
         loading: true,
         error: false
     }
@@ -59,24 +59,30 @@ export default class PictureList extends Component {
         }, this.getMediaList);
     };
 
-    render() {
-        const mediaList = this.state.mediaList;
-
+    getToday(){
         const newDate = new Date();
         let year = newDate.getFullYear(),
             month = newDate.getMonth() + 1,
             day = newDate.getDate();
+
         if (month < 10) {
             month = '0' + month;
         }
+
+        return year + '-' + month + '-' + day;
+    };
+
+    render() {
+        const mediaList = this.state.mediaList;
+        const today = this.getToday();
 
         return (
             <div className="picture-list">
                 <div className="list-range">
                     <span>From:</span>
-                    <input type="date" value={this.state.dateFrom} max={year + '-' + month + '-' + day} onChange={this.onChangeDateFrom}/>
+                    <input type="date" value={this.state.dateFrom} max={today} onChange={this.onChangeDateFrom}/>
                     <span>To:</span>
-                    <input type="date" value={this.state.dateTo} min={this.state.dateFrom} max={year + '-' + month + '-' + day} onChange={this.onChangeDateTo}/>
+                    <input type="date" value={this.state.dateTo} min={this.state.dateFrom} max={today} onChange={this.onChangeDateTo}/>
                 </div>
 
                 {

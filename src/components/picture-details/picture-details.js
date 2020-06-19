@@ -14,11 +14,19 @@ export default class PictureDetails extends Component {
             date: '',
             explanation: ''
         },
+
         loading: true
     };
 
     componentDidMount() {
-        this.getMediaDate();
+        const date = localStorage.getItem('date');
+
+        this.setState({
+            data: {
+                date: date === null ? '' : date
+            }
+        }, this.getMediaDate);
+
     };
 
     getMediaDate() {
@@ -47,25 +55,37 @@ export default class PictureDetails extends Component {
             });
     };
 
-    getDateValue = (event) => {
+    changeDateValue = (event) => {
+        const date = event.target.value;
+
+        if(date !== this.getToday()) {
+            localStorage.setItem('date', date)
+        }
+
         this.setState({
             data: {
-                date: event.target.value
+                date
             }
         }, this.getMediaDate);
+    };
+
+    getToday(){
+        const newDate = new Date();
+        let year = newDate.getFullYear(),
+            month = newDate.getMonth() + 1,
+            day = newDate.getDate();
+
+        if (month < 10) {
+            month = '0' + month;
+        }
+
+        return year + '-' + month + '-' + day;
     };
 
     render() {
         const {mediaType, title, url, date, explanation} = this.state.data;
         let mediaFile = null;
-
-        const newDate = new Date();
-        let year = newDate.getFullYear(),
-            month = newDate.getMonth() + 1,
-            day = newDate.getDate();
-        if (month < 10) {
-            month = '0' + month;
-        }
+        const today = this.getToday();
 
         mediaType === 'image'
             ? mediaFile = <img src={url} alt="Astronomy"/>
@@ -82,8 +102,8 @@ export default class PictureDetails extends Component {
                         : (<React.Fragment>
                             <div className="picture-date">
                                 <h3>Choose another day</h3>
-                                <input type="date" value={`${year}-${month}-${day}`} onChange={this.getDateValue}
-                                       max={year + '-' + month + '-' + day}/>
+                                <input type="date" value={date} onChange={this.changeDateValue}
+                                       max={today}/>
                             </div>
 
                             <h4>{date}</h4>
