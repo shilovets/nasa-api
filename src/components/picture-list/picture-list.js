@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import axios from "axios";
 
 import "./picture-list.css";
+
 import Spinner from "../spinner/spinner";
 import ErrorIndicator from "../error-indicator/error-indicator";
 

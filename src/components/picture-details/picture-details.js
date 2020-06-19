@@ -90,7 +90,7 @@ export default class PictureDetails extends Component {
         mediaType === 'image'
             ? mediaFile = <img src={url} alt="Astronomy"/>
             : mediaFile = (
-                <iframe src={url} frameBorder="0" width="70%" height="600px" allowFullScreen title="video"/>
+                <iframe src={url} frameBorder="0" width="70%" height="700px" allowFullScreen title="video"/>
             )
 
         return (
