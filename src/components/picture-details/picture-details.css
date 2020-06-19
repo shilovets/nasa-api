@@ -35,3 +35,62 @@ h1, h2, h3, h4, h5, h6 {
 .picture-date h3{
     margin-right: 20px;
 }
+
+/*Media queries*/
+
+@media (max-width: 1200px) {
+    .picture-details iframe {
+        width: 80%;
+        height: 600px;
+    }
+
+}
+
+@media (max-width: 1024px) {
+    .picture-details img{
+        width: 60%;
+    }
+
+    .picture-details iframe {
+        width: 80%;
+        height: 500px;
+    }
+}
+
+@media (max-width: 992px) {
+    .picture-details h1{
+        font-size: 22px;
+    }
+
+    .picture-details h3{
+        font-size: 20px;
+    }
+
+    .picture-details h4 {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    input[type="date"] {
+        min-width: 150px;
+    }
+
+    .picture-details iframe {
+        width: 70%;
+        height: 300px;
+    }
+
+    .picture-details h1{
+        font-size: 20px;
+    }
+
+    .picture-details h3{
+        font-size: 18px;
+    }
+
+    .picture-details h4 {
+        font-size: 16px;
+    }
+}

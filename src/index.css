@@ -1,13 +1,23 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+input[type="date"] {
+  outline: none;
+  min-width: 170px;
+  box-sizing: border-box;
+  border: 2px solid #ada9a9;
+  border-radius: 5px;
+  background: transparent;
+  padding: 5px;
+  color: #ada9a9;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+input[type="date"]::-webkit-inner-spin-button {
+  display: none
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  background: transparent
+}
+input[type="date"]::-webkit-meter-suboptimum-value{
+  color: red;
 }
