@@ -1,21 +1,21 @@
 input[type="date"] {
-  outline: none;
-  min-width: 170px;
-  appearance: none;
-  box-sizing: border-box;
-  border: 2px solid #ada9a9;
-  border-radius: 5px;
-  background: transparent;
-  padding: 5px;
-  color: #ada9a9;
-  text-transform: uppercase;
-  font-weight: bold;
+    outline: none;
+    min-width: 170px;
+    appearance: none;
+    box-sizing: border-box;
+    border: 2px solid #ada9a9;
+    border-radius: 5px;
+    background: transparent;
+    padding: 5px;
+    color: #ada9a9;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 
 input[type="date"]::-webkit-inner-spin-button {
-  display: none
+    display: none
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
-  background: transparent
+    background: transparent
 }

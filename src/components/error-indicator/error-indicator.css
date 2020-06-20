@@ -1,0 +1,7 @@
+.alert {
+    display: inline-block;
+}
+
+.alert button {
+    outline: none;
+}

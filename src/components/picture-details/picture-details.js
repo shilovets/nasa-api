@@ -1,119 +1,98 @@
 import React, {Component} from "react";
-import axios from "axios";
+import {connect} from "react-redux";
+
+import Spinner from "../spinner/spinner";
+import ErrorBoundry from "../error-boundry/error-boundry";
+import {withAstronomyService} from "../hoc/with-astronomy-service";
+import {astronomyLoaded, astronomyRequested, astronomyError} from "../../actions/index";
+import DateConverter from "../../utils/date-converter";
 
 import "./picture-details.css";
-import Spinner from "../spinner/spinner";
 
-export default class PictureDetails extends Component {
+const currentDate = DateConverter.convertDateToDefaultFormat(new Date());
 
-    state = {
-        data: {
-            mediaType: '',
-            title: '',
-            url: '',
-            date: '',
-            explanation: ''
-        },
-
-        loading: true
-    };
+class PictureDetails extends Component {
 
     componentDidMount() {
-        const date = localStorage.getItem('date');
-
-        this.setState({
-            data: {
-                date: date === null ? '' : date
-            }
-        }, this.getMediaDate);
-
+        this.props.fetchAstronomy(this.props.selectedDate);
     };
 
-    getMediaDate() {
-        this.setState({
-            loading: true
-        });
-
-        axios.get(`https://api.nasa.gov/planetary/apod?date=${this.state.data.date}&api_key=1Y7KbQaKepAKKDALm5fRa1FX69qfZJ50ddAXqtv3`)
-            .then(res => {
-                this.setState({
-                    data: {
-                        mediaType: res.data.media_type,
-                        title: res.data.title,
-                        url: res.data.url,
-                        date: res.data.date,
-                        explanation: res.data.explanation
-                    },
-                    loading: false
-                });
-            })
-            .catch(error => {
-                this.setState({
-                    loading: false
-                })
-                console.log(error);
-            });
-    };
-
-    changeDateValue = (event) => {
+    handleChangeDate = event => {
         const date = event.target.value;
 
-        if(date !== this.getToday()) {
-            localStorage.setItem('date', date)
+        if (date !== currentDate) {
+            localStorage.setItem('date', date);
         }
 
-        this.setState({
-            data: {
-                date
-            }
-        }, this.getMediaDate);
-    };
-
-    getToday(){
-        const newDate = new Date();
-        let year = newDate.getFullYear(),
-            month = newDate.getMonth() + 1,
-            day = newDate.getDate();
-
-        if (month < 10) {
-            month = '0' + month;
-        }
-
-        return year + '-' + month + '-' + day;
+        this.props.fetchAstronomy(date);
     };
 
     render() {
-        const {mediaType, title, url, date, explanation} = this.state.data;
-        let mediaFile = null;
-        const today = this.getToday();
-
-        mediaType === 'image'
-            ? mediaFile = <img src={url} alt="Astronomy"/>
-            : mediaFile = (
-                <iframe src={url} frameBorder="0" width="70%" height="700px" allowFullScreen title="video"/>
-            )
+        const {astronomy, loading, error} = this.props;
 
         return (
-
             <div className="picture-details">
+                <div className="picture-date">
+                    <h3>Choose another date</h3>
+                    <input type="date"
+                           max={currentDate}
+                           value={astronomy.length > 0 ? astronomy[0].date : currentDate}
+                           onChange={this.handleChangeDate}/>
+                </div>
+                {error ? <ErrorBoundry/> : null}
+                {loading ? <Spinner/> : null}
                 {
-                    this.state.loading
-                        ? <Spinner/>
-                        : (<React.Fragment>
-                            <div className="picture-date">
-                                <h3>Choose another day</h3>
-                                <input type="date" value={date} onChange={this.changeDateValue}
-                                       max={today}/>
+                    astronomy.map(({media_type, title, date, url, explanation}, idx) => {
+                        return (
+                            <div className="picture-details" key={idx}>
+
+                                <h4>{date}</h4>
+                                <h1>{title}</h1>
+                                {
+                                    media_type === 'image'
+                                        ? <img src={url}
+                                               alt="astronomy"/>
+                                        :
+                                        <iframe src={url} frameBorder="0" width="70%" height="700px"
+                                                title="video"
+                                                allowFullScreen/>
+                                }
+                                <p>{explanation}</p>
                             </div>
-
-                            <h4>{date}</h4>
-                            <h1>{title}</h1>
-                            {mediaFile}
-                            <p>{explanation}</p>
-                        </React.Fragment>)
+                        );
+                    })
                 }
-
             </div>
         );
     };
+}
+
+const mapStateToProps = ({astronomy, loading, error, selectedDate}) => {
+    return {
+        astronomy,
+        loading,
+        error,
+        selectedDate
+    };
 };
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    const {astronomyService} = ownProps;
+    return {
+        fetchAstronomy: (selectedDate) => {
+            dispatch(astronomyRequested());
+            astronomyService.getAstronomy(selectedDate)
+                .then(({data}) => {
+                    let dataPicture = [];
+                    dataPicture.push(data);
+                    dispatch(astronomyLoaded(dataPicture));
+                })
+                .catch(err => {
+                    dispatch(astronomyError(err));
+                });
+        }
+    };
+
+};
+
+export default withAstronomyService()(connect(mapStateToProps, mapDispatchToProps)(PictureDetails));
