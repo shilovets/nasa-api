@@ -3,8 +3,8 @@ import {Switch, Route} from "react-router-dom";
 import {withAstronomyService} from "../hoc/with-astronomy-service";
 
 import Header from "../header/header";
-import PictureDetails from "../picture-details/picture-details";
-import PictureList from "../picture-list/picture-list";
+import AstronomyDetails from "../astronomy-details/astronomy-details";
+import AstronomyList from "../astronomy-list/astronomy-list";
 
 import "./app.css";
 
@@ -13,8 +13,8 @@ const App = () => {
         <React.Fragment>
             <Header/>
             <Switch>
-                <Route path="/" exact component={PictureDetails}/>
-                <Route path="/catalog" component={PictureList}/>
+                <Route path="/" exact component={AstronomyDetails}/>
+                <Route path="/catalog" component={AstronomyList}/>
             </Switch>
         </React.Fragment>
     )

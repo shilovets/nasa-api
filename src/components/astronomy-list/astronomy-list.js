@@ -13,9 +13,9 @@ import {
 } from "../../actions/index";
 import DateConverter from "../../utils/date-converter";
 
-import "./picture-list.css";
+import "./astronomy-list.css";
 
-class PictureList extends Component {
+class AstronomyList extends Component {
 
     componentDidMount() {
         this.props.fetchAstronomyList(this.props.startDate, this.props.endDate);
@@ -115,4 +115,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     };
 };
 
-export default withAstronomyService()(connect(mapStateToProps, mapDispatchToProps)(PictureList));
+export default withAstronomyService()(connect(mapStateToProps, mapDispatchToProps)(AstronomyList));

@@ -7,11 +7,11 @@ import {withAstronomyService} from "../hoc/with-astronomy-service";
 import {astronomyLoaded, astronomyRequested, astronomyError} from "../../actions/index";
 import DateConverter from "../../utils/date-converter";
 
-import "./picture-details.css";
+import "./astronomy-details.css";
 
 const currentDate = DateConverter.convertDateToDefaultFormat(new Date());
 
-class PictureDetails extends Component {
+class AstronomyDetails extends Component {
 
     componentDidMount() {
         this.props.fetchAstronomy(this.props.selectedDate);
@@ -95,4 +95,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
 };
 
-export default withAstronomyService()(connect(mapStateToProps, mapDispatchToProps)(PictureDetails));
+export default withAstronomyService()(connect(mapStateToProps, mapDispatchToProps)(AstronomyDetails));
