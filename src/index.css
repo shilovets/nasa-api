@@ -17,7 +17,8 @@ input[type="date"]::-webkit-inner-spin-button {
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
-    background: url(https://cdn3.iconfinder.com/data/icons/linecons-free-vector-icons-pack/32/calendar-16.png) center/80% no-repeat;
+    background: transparent;
+    color: #ada9a9;
     opacity: 0.8
 }
 
