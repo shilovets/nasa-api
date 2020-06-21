@@ -13,8 +13,8 @@ const App = () => {
         <React.Fragment>
             <Header/>
             <Switch>
-                <Route path="/" exact component={AstronomyDetails}/>
-                <Route path="/catalog" component={AstronomyList}/>
+                <Route path="/nasa-api" exact component={AstronomyDetails}/>
+                <Route path="/nasa-api/catalog" component={AstronomyList}/>
             </Switch>
         </React.Fragment>
     )
